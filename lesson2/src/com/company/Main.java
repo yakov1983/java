@@ -85,5 +85,14 @@ public class Main {
 		//опереатор % - остаток  от деления
 		//5 % 2 = 1
 		System.out.println(5 % 3);
+
+    	//строка
+		String name = "Vasya";
+
+		switch(name){
+			case "Vasya":
+				System.out.println("некорректный ввод");
+				break;
+		}
     }
 }
