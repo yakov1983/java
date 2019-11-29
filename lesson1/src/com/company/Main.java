@@ -29,5 +29,6 @@ public class Main {
        System.out.println((double)x / y); // явное преобразование типов
 
        System.out.println(x * (y + 1));
+       System.out.println(x * (y + 1));
     }
 }
