@@ -9,6 +9,7 @@ public class Main {
     * а) переопределение методов(перегрузка)
     * б)
     * 3. Наследование
+    * 4. Абстракция
     * */
 
     public static void main(String[] args) {
@@ -32,9 +33,30 @@ public class Main {
         System.out.println(animal2.color);  //blue
         test(animal);
         System.out.println(animal.color); // red
+
+        Dog dog = new Dog();
+        dog.color = "white";
+        dog.weight = 10;
+        dog.sleep(3);
+        dog.breed = "Овчарка";
+        dog.bark();
+        dog.eat();
+
+        //полиморфизм
+        Animal animal3 = new Dog(); // остануться свойства и методы которые есть у Animal и у Dog остаются переопределенные методы
+        animal3.eat();
+        animal3.sleep(4);
+        sleep(animal);
+        sleep(dog);
+        sleep(animal3);
     }
 
     public static void test(Animal a) {
         a.color = "red";
+    }
+
+    //sleep - это обобщенный метод
+    public static void sleep(Animal a) {
+        a.sleep(10);
     }
 }
