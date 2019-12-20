@@ -66,6 +66,11 @@ public class Main {
         catch (Throwable e) {
 
         }
+
+        //  Игра в угадай число
+
+        Game game = new Game();
+        game.start();
     }
 
     public  static void test() throws MyException, RuntimeException   {
