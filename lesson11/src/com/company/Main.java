@@ -2,6 +2,9 @@ package com.company;
 
 import jdk.swing.interop.SwingInterOpUtils;
 
+import javax.xml.crypto.Data;
+import java.util.Date;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -88,6 +91,34 @@ public class Main {
         // приведение регистров
         System.out.println(str.toLowerCase());
         System.out.println(str.toUpperCase());
+
+      ///////////// Форматирование строк   ///////////////////
+        // флаги форматирования
+        // %s - строка
+        // %d - целое число
+        // %f - вещественное число
+        // %с - символ
+        // %b - тип boolean
+        // %t - для вывода дат
+        // %% - вывод символа процент '%'
+        // спец символы
+        //  \n - переход на новую строку
+        //  \t - красная строка
+        //  \в - удаляет предыдущий символ
+        //  \\ - вывод символа '\'
+
+        Date d = new Date();                // класс даты
+       String sFormat = String.format("Меня зовут %s.\nМне %d лет. \n%tc", "Tom", 10, d);
+        System.out.println(sFormat);
+        System.out.printf("Мое счастливое число %2$d.\nМой любимый цвет - %1$s\n", "red", 40);
+
+        //////////// Преобразование нестроковых обьектов в строки  ///////////
+
+        System.out.println(String.valueOf(125));   // получилась строка - метод   String.valueOf
+
+
+
+
 
     }
 }
