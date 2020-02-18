@@ -41,9 +41,18 @@ public class Main {
         Thread thread3 = new Thread(new Runnable() {
             @Override
             public void run() {
-                for(int i = 0; i < 100_000; i++) {
-                    myClass.calc(1);
-                    myClass.calc2(1, "A");
+
+                Thread ct = Thread.currentThread();
+                synchronized (ct) {
+                    try {
+                        ct.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    for (int i = 0; i < 100_000; i++) {
+                        myClass.calc(1);
+                        myClass.calc2(1, "A");
+                    }
                 }
             }
         });
@@ -51,7 +60,24 @@ public class Main {
         Thread thread4 = new Thread(new Runnable() {
             @Override
             public void run() {
+
+                Thread ct = Thread.currentThread();
+                System.out.println(ct.getName());
+
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("\n\n\n\n" + ct.getName() + "wake up\n");
+
                 for(int i = 0; i < 100_000; i++) {
+                    if (i == 1000) {
+                        synchronized (thread3) {
+                            System.out.println(thread3.getState());
+                            thread3.notifyAll();
+                        }
+                    }
                     myClass.calc(-1);
                     myClass.calc2(-1, "B");
                 }
@@ -70,5 +96,48 @@ public class Main {
 
         System.out.println(myClass.value);
         System.out.println(myClass.value2);
+
+        ////  currentThread -  возвращает обьект текущего потока
+
+        Thread ct = Thread.currentThread();
+        System.out.println(ct.getName());
+
+        ///// sleep - останавливает работу потока на заданное время
+
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        //// wait - приостанвливает работу потока до наступления события о пробуждении
+
+        try {
+            // ct.wait(); - не вызывать в основном потоке
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ///   чтобы пробудить поток нужно вызвать  notify, notifyAll - они создают для потока событие,
+        /// чтобы тот продолжил работать
+
+
+
+        /// getState - возвращает текущее состояние потока
+        System.out.println(ct.getState());
+
+
+        ////interrupt - прерывает выполнение потока
+
+        ct.interrupt();
+
+        //// Thread.yield() - завершает квант времени работы потока
+        ////  и переключается на следующий
+        Thread.yield();
+
+        ///////  setPriority - задает приоритет потока
+
+
+
+
     }
 }
