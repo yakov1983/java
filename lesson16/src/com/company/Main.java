@@ -10,6 +10,7 @@ public class Main {
         ///////////  Сериализация  ///////////////
 
         User u = new User("Vasya", 20);
+        u.height = 120.3f;
 
         try {
             FileOutputStream fos = new FileOutputStream("User.bin");
@@ -31,6 +32,7 @@ public class Main {
             fis.close();
             System.out.println(user.name);
             System.out.println(user.age);
+            System.out.println(user.height);
         } catch (Exception e) {
             e.printStackTrace();
         }
